@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\upload_download"
   ],
+  "SelectedNode": "\\upload_download\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

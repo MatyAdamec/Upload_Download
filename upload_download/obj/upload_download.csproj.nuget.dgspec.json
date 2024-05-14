@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Maty\\Source\\Repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj": {}
+    "C:\\Users\\Maty\\source\\repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Maty\\Source\\Repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj": {
+    "C:\\Users\\Maty\\source\\repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maty\\Source\\Repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj",
+        "projectUniqueName": "C:\\Users\\Maty\\source\\repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj",
         "projectName": "upload_download",
-        "projectPath": "C:\\Users\\Maty\\Source\\Repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj",
+        "projectPath": "C:\\Users\\Maty\\source\\repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\upload_download.csproj",
         "packagesPath": "C:\\Users\\Maty\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maty\\Source\\Repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\obj\\",
+        "outputPath": "C:\\Users\\Maty\\source\\repos\\pslib-cz\\2023-p3a-web-files-in-the-database-MatyAdamec\\upload_download\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -22,7 +22,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,8 +30,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -42,8 +42,44 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.19, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.19, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[7.0.18, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.19, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.19, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.19, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
