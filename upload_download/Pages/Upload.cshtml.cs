@@ -59,18 +59,18 @@ namespace upload_download.Pages
                     OriginalName = uploadedFile.FileName,
                     ContentType = uploadedFile.ContentType
                 };
-                if (uploadedFile.ContentType.StartsWith("image")) // je soubor obrázek?
+                if (uploadedFile.ContentType.StartsWith("image")) 
                 {
                     fileRecord.Thumbnails = new List<Thumbnail>();
-                    MemoryStream ims = new MemoryStream(); // proud pro pøíchozí obrázek
-                    MemoryStream oms1 = new MemoryStream(); // proud pro ètvercový náhled
-                    MemoryStream oms2 = new MemoryStream(); // proud pro obdélníkový náhled
-                    uploadedFile.CopyTo(ims); // vlož obsah do vstupního proudu
-                    IImageFormat format; // zde si uložíme formát obrázku (JPEG, GIF, ...), budeme ho potøebovat pøi ukládání
-                    using (SixLabors.ImageSharp.Image image = Image.Load(ims.ToArray())) // vytvoøíme ètvercový náhled
+                    MemoryStream ims = new MemoryStream(); 
+                    MemoryStream oms1 = new MemoryStream();
+                    MemoryStream oms2 = new MemoryStream(); 
+                    uploadedFile.CopyTo(ims); 
+                    IImageFormat format; 
+                    using (SixLabors.ImageSharp.Image image = Image.Load(ims.ToArray()))
                     {
-                        int largestSize = Math.Max(image.Height, image.Width); // jaká je orientace obrázku?
-                        if (image.Width > image.Height) // podle orientace zmìníme velikost obrázku
+                        int largestSize = Math.Max(image.Height, image.Width);
+                        if (image.Width > image.Height) 
                         {
                             image.Mutate(x => x.Resize(0, _squareSize));
                         }
@@ -79,14 +79,14 @@ namespace upload_download.Pages
                             image.Mutate(x => x.Resize(_squareSize, 0));
                         }
                         image.Mutate(x => x.Crop(new Rectangle((image.Width - _squareSize) / 2, (image.Height - _squareSize) / 2, _squareSize, _squareSize)));
-                        // obrázek oøízneme na ètverec
-                        image.SaveAsJpeg(oms1); // vložíme ho do výstupního proudu
-                        fileRecord.Thumbnails.Add(new Thumbnail { Type = ThumbnailType.Square, Blob = oms1.ToArray() }); // a uložíme do databáze jako pole bytù
+                        
+                        image.SaveAsJpeg(oms1); 
+                        fileRecord.Thumbnails.Add(new Thumbnail { Type = ThumbnailType.Square, Blob = oms1.ToArray() });
                     }
-                    using (Image image = Image.Load(ims.ToArray())) // obdélníkový náhled zaèíná zde
+                    using (Image image = Image.Load(ims.ToArray()))
                     {
-                        image.Mutate(x => x.Resize(0, _sameAspectRatioHeigth)); // staèí jen zmìnit jeho velikost
-                        image.SaveAsJpeg(oms2); // a pøes proud ho uložit do databáze
+                        image.Mutate(x => x.Resize(0, _sameAspectRatioHeigth));
+                        image.SaveAsJpeg(oms2);
                         fileRecord.Thumbnails.Add(new Thumbnail { Type = ThumbnailType.SameAspectRatio, Blob = oms2.ToArray() });
                     }
                 }

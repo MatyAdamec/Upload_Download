@@ -11,17 +11,19 @@
     <table class="table table-striped table-responsive">
         <thead>
             <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var f in Model.Files)
+            @foreach (var file in Model.Files)
             {
                 <tr>
-                    <td>@f</td>
+                    <td><img src="@Url.Page("Uploads", "Image", new { id = file.Id })" alt="Image" style="width:100px; height:auto;" /></td>
+                    <td>@file.OriginalName</td>
                     <td>
-                        <a class="btn btn-sm btn-primary" asp-page-handler="download" asp-route-filename="@f">Download</a>
+                        <a class="btn btn-sm btn-primary" asp-page-handler="download" asp-route-fileid="@file.Id">Download</a>
                     </td>
                 </tr>
             }

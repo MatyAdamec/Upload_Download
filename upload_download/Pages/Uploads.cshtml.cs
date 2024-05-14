@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Mime;
 using upload_download.Data;
+using upload_download.Models;
 
 namespace upload_download.Pages
 {
@@ -16,7 +17,7 @@ namespace upload_download.Pages
         public string SuccessMessage { get; set; }
         [TempData]
         public string ErrorMessage { get; set; }
-        public List<string> Files { get; set; } = new List<string>();
+        public List<StoredFile> Files { get; set; } = new List<StoredFile>();
 
         public UploadsModel(ILogger<UploadsModel> logger, IWebHostEnvironment environment, ApplicationDbContext context)
         {
@@ -27,32 +28,51 @@ namespace upload_download.Pages
 
         public void OnGet()
         {
-            Files = _context.StoredFiles.Select(f => f.OriginalName).ToList();
+            Files = _context.StoredFiles.ToList();
         }
 
-        public IActionResult OnGetDownload(string filename)
+        public IActionResult OnGetDownload(Guid fileid)
         {
-            // Retrieve the file based on the original name provided.
-            var file = _context.StoredFiles.FirstOrDefault(f => f.OriginalName == filename);
+            var file = _context.StoredFiles.FirstOrDefault(f => f.Id == fileid);
 
             if (file == null)
             {
-                ErrorMessage = "There is no such file.";
-                return RedirectToPage();
+                Console.WriteLine("NOT FOUND");
+                return NotFound();
             }
 
-            // Construct the full path using the file's ID.
             var fullName = Path.Combine(_environment.ContentRootPath, "Uploads", file.Id.ToString());
 
             if (System.IO.File.Exists(fullName))
             {
-                // Return the file to the client with the original filename for download.
                 return PhysicalFile(fullName, MediaTypeNames.Application.Octet, file.OriginalName);
             }
             else
             {
                 ErrorMessage = "File not found on server.";
                 return RedirectToPage();
+            }
+        }
+
+        public IActionResult OnGetImage(Guid id)
+        {
+            _logger.LogInformation($"my fucking fileid: {id}");
+            var file = _context.StoredFiles.FirstOrDefault(f => f.Id == id);
+            if (file == null)
+            {
+                return NotFound();
+            }
+
+            var path = Path.Combine(_environment.ContentRootPath, "Uploads", file.Id.ToString());
+            _logger.LogInformation($"my fucking path: {path}");
+
+            if (System.IO.File.Exists(path))
+            {
+                return PhysicalFile(path, file.ContentType);
+            }
+            else
+            {
+                return NotFound();
             }
         }
 
